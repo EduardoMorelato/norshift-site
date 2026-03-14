@@ -1,0 +1,112 @@
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   sections.css
+   Estilos das seções: Ticker, Social Proof.
+   Novas seções são adicionadas aqui.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* ── TICKER ─────────────────────────────────────────────
+   Lei 9: movimento contínuo entre hero e cartões.
+   Não é cartão — fica na esteira sem border-radius.
+──────────────────────────────────────────────────────── */
+.ticker-wrap {
+  width: 100%;
+  overflow: hidden;
+  padding: 20px 0;
+  border-top:    1px solid var(--border-dark);
+  border-bottom: 1px solid var(--border-dark);
+  background: rgba(13,28,53,0.6);
+}
+
+.ticker-track {
+  display: flex;
+  white-space: nowrap;
+  animation: ticker 30s linear infinite;
+}
+
+/* Pausa ao passar o mouse */
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 32px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  user-select: none;
+}
+
+/* Pontinho separador entre itens */
+.ticker-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--mint);
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); } /* -50% porque o conteúdo é duplicado */
+}
+
+/* ── SOCIAL PROOF ───────────────────────────────────────
+   Lei 7: primeiro cartão — antes dos serviços.
+──────────────────────────────────────────────────────── */
+.proof-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+
+/* Grid de stats */
+.proof-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(0,0,0,0.08);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.stat-item {
+  background: var(--card-bg-inner);
+  padding: 40px 32px;
+  text-align: center;
+}
+
+/* Logos de clientes */
+.proof-logos-label {
+  font-family: var(--font-body);
+  font-size: var(--text-eyebrow);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--card-muted);
+  margin-bottom: 24px;
+}
+
+.proof-logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+/* ── RESPONSIVO ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .proof-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-item {
+    padding: 28px 24px;
+  }
+}

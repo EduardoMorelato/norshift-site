@@ -1,0 +1,156 @@
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   layout.css
+   Lei 1: sistema de cartões sobre a esteira.
+   Todas as seções usam .card dentro de .card-track.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* ── ESTEIRA ────────────────────────────────────────────
+   O fundo navy que aparece entre os cartões.
+   Lei 10: gap entre cartões = espaço intencional.
+──────────────────────────────────────────────────────── */
+.card-track {
+  display: flex;
+  flex-direction: column;
+  gap: var(--card-gap);
+  padding: 0 24px;          /* margem lateral da esteira */
+  padding-bottom: 24px;
+}
+
+/* ── CARTÃO BASE ────────────────────────────────────────
+   Lei 1: border-radius + sombra + off-white
+──────────────────────────────────────────────────────── */
+.card {
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  color: var(--card-text);
+
+  /* Padding padrão — pode ser sobrescrito por .card--tight ou inline */
+  padding: var(--section-pad-v) var(--section-pad-h);
+}
+
+/* Variação sem padding (para quando o conteúdo controla o próprio espaço) */
+.card--flush {
+  padding: 0;
+}
+
+/* Cartão com menos padding */
+.card--tight {
+  padding: 48px 40px;
+}
+
+/* ── CONTAINER INTERNO ──────────────────────────────────
+   Limita a largura do conteúdo dentro do cartão.
+   Seções muito largas ficam desconfortáveis de ler.
+──────────────────────────────────────────────────────── */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ── GRIDS UTILITÁRIOS ─────────────────────────────────── */
+
+/* 2 colunas iguais */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+
+/* 3 colunas iguais */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* 4 colunas iguais */
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* Auto-fit responsivo — min 280px por coluna */
+.grid-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+/* ── HEADER DA SEÇÃO ────────────────────────────────────
+   Padrão: eyebrow + título + subtítulo opcional
+──────────────────────────────────────────────────────── */
+.section-header {
+  margin-bottom: 56px;
+}
+
+.section-header.centered {
+  text-align: center;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 56px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: 900;
+  color: var(--card-text);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.section-title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.section-subtitle {
+  font-size: var(--text-small);
+  color: var(--card-muted);
+  line-height: 1.75;
+  max-width: 520px;
+}
+
+/* ── DIVISOR ────────────────────────────────────────────── */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--card-border);
+  margin: 40px 0;
+}
+
+/* ── RESPONSIVO ─────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .card {
+    padding: 64px 48px;
+  }
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .card-track {
+    padding: 0 12px;
+    padding-bottom: 12px;
+  }
+  .card {
+    padding: 48px 28px;
+    border-radius: 16px;
+  }
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+  .section-header {
+    margin-bottom: 40px;
+  }
+}

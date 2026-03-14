@@ -1,0 +1,85 @@
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   variables.css
+   Design tokens do Norshift.
+   EDITE AQUI para mudar cores, fontes e espaçamentos
+   em todo o site de uma vez.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+:root {
+
+  /* ── CORES ─────────────────────────────────────────────
+     Lei 2: apenas 3 tokens de cor. Nada mais.
+  ──────────────────────────────────────────────────────── */
+
+  /* Background global (esteira entre os cartões) */
+  --navy:          #0a1628;
+  --navy-mid:      #0d1c35;
+
+  /* Cartões (seções claras sobre a esteira escura) */
+  --card-bg:       #F2F4F0;    /* off-white — nunca #ffffff puro */
+  --card-bg-inner: #ECEEF0;    /* superfície interna dos cartões */
+  --card-border:   rgba(0,0,0,0.06);
+  --card-text:     #0f1c2e;    /* texto principal dentro dos cartões */
+  --card-muted:    #5a6a80;    /* texto secundário dentro dos cartões */
+
+  /* Accent único — mint */
+  --mint:          #4DFFB4;
+
+  /* Texto na hero e elementos sobre fundo escuro */
+  --white:         #F0F4FF;    /* off-white frio */
+  --muted:         #7A94BA;    /* texto muted sobre navy */
+  --border-dark:   rgba(255,255,255,0.07);
+
+  /* Gradiente CTA — botões e destaques */
+  --cta-from:      #6C63FF;
+  --cta-to:        #FF6B6B;
+  --cta-gradient:  linear-gradient(135deg, var(--cta-from), var(--cta-to));
+  --cta-shadow:    0 4px 24px rgba(108,99,255,0.35);
+
+  /* Roxo puro para accent em cartões claros */
+  --accent:        #6C63FF;
+
+  /* ── TIPOGRAFIA ─────────────────────────────────────────
+     Lei 4: hierarquia extrema entre tamanhos
+     Lei 6: nunca mais de 2 famílias
+  ──────────────────────────────────────────────────────── */
+
+  --font-display:  'Barlow Condensed', sans-serif;  /* títulos, labels, botões */
+  --font-body:     'DM Sans', sans-serif;            /* textos, parágrafos */
+
+  /* Escala de tamanhos */
+  --text-hero:     clamp(3.8rem, 11vw, 10rem);
+  --text-h2:       clamp(2.4rem, 5vw, 4rem);
+  --text-h3:       clamp(1.4rem, 2.5vw, 2rem);
+  --text-body:     1rem;
+  --text-small:    0.875rem;
+  --text-eyebrow:  0.68rem;
+
+  /* ── LAYOUT ─────────────────────────────────────────────
+     Lei 1: cartões com bordas arredondadas
+     Lei 10: espaço generoso entre tudo
+  ──────────────────────────────────────────────────────── */
+
+  --card-radius:   24px;       /* border-radius dos cartões */
+  --card-gap:      16px;       /* espaço entre cartões na esteira */
+
+  /* Padding interno de cada cartão */
+  --section-pad-v: 80px;
+  --section-pad-h: 64px;
+
+  /* ── SOMBRAS ─────────────────────────────────────────── */
+
+  --shadow-card:
+    0 0 0 1px rgba(0,0,0,0.04),
+    0 12px 48px rgba(0,0,0,0.12);
+
+  --shadow-card-hover:
+    0 0 0 1px rgba(0,0,0,0.06),
+    0 20px 64px rgba(0,0,0,0.18);
+
+  /* ── TRANSIÇÕES ──────────────────────────────────────── */
+
+  --transition-fast:   0.2s ease;
+  --transition-medium: 0.35s ease;
+  --transition-slow:   0.6s ease;
+}

@@ -1,0 +1,191 @@
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   navbar.css
+   Lei 6: pill flutuante, minimalista.
+   Logo · Links · CTA — nada mais.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+nav {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  width: calc(100% - 80px);
+  max-width: 1100px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 28px;
+
+  /* Pill flutuante */
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(10,22,40,0.55);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.3),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+
+  transition:
+    background var(--transition-medium),
+    box-shadow var(--transition-medium),
+    top 0.3s ease;
+}
+
+/* Estado ao scrollar — mais sólido */
+nav.scrolled {
+  background: rgba(10,22,40,0.96);
+  box-shadow:
+    0 12px 48px rgba(0,0,0,0.5),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+  top: 12px;
+}
+
+/* ── LOGO ──────────────────────────────────────────────── */
+.nav-logo {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.35rem;
+  letter-spacing: 0.06em;
+  color: var(--white);
+  text-decoration: none;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.nav-logo span {
+  color: var(--mint);
+}
+
+/* ── LINKS ─────────────────────────────────────────────── */
+.nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 400;
+  transition: color var(--transition-fast);
+  position: relative;
+}
+
+/* Underline draw-from-left no hover */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--mint);
+  transition: width var(--transition-medium);
+}
+
+.nav-links a:hover         { color: var(--white); }
+.nav-links a:hover::after  { width: 100%; }
+
+/* ── CTA BOTÃO ─────────────────────────────────────────── */
+.nav-cta {
+  display: inline-block;
+  background: var(--cta-gradient);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 9px 22px;
+  border-radius: 999px;
+  text-decoration: none;
+  flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(108,99,255,0.3);
+  /* transform controlado pelo GSAP (efeito gelatina) */
+}
+
+/* ── MENU MOBILE ───────────────────────────────────────── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--white);
+  border-radius: 2px;
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+  transform-origin: center;
+}
+
+/* Animação para X quando aberto */
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* ── MENU MOBILE OVERLAY ───────────────────────────────── */
+.nav-mobile-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: rgba(10,22,40,0.97);
+  backdrop-filter: blur(20px);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-medium);
+}
+
+.nav-mobile-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.nav-mobile-overlay a {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--white);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  transition: color var(--transition-fast);
+}
+
+.nav-mobile-overlay a:hover { color: var(--mint); }
+
+/* ── RESPONSIVO ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  nav {
+    width: calc(100% - 32px);
+    top: 12px;
+    padding: 12px 18px;
+  }
+
+  nav.scrolled { top: 8px; }
+
+  .nav-links   { display: none; }
+  .nav-hamburger { display: flex; }
+  .nav-mobile-overlay { display: flex; }
+}

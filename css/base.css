@@ -1,0 +1,142 @@
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   base.css
+   Reset, tipografia base, utilitários globais.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* ── RESET ─────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--navy);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+  opacity: 0; /* GSAP revela no load */
+}
+
+/* ── SCROLLBAR CUSTOMIZADA ─────────────────────────────── */
+::-webkit-scrollbar        { width: 5px; }
+::-webkit-scrollbar-track  { background: var(--navy); }
+::-webkit-scrollbar-thumb  { background: rgba(77,255,180,0.3); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(77,255,180,0.6); }
+
+/* ── SELEÇÃO DE TEXTO ──────────────────────────────────── */
+::selection {
+  background: rgba(108, 99, 255, 0.3);
+  color: var(--white);
+}
+
+/* ── FOCO (acessibilidade por teclado) ─────────────────── */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--mint);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── REMOVE TAP HIGHLIGHT NO MOBILE ───────────────────── */
+a, button, [role="button"] {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* ── TIPOGRAFIA BASE ───────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+/* Lei 5: <em> dentro de títulos = itálico elegante */
+h1 em, h2 em, h3 em {
+  font-style: italic;
+}
+
+p {
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── UTILITÁRIOS DE ANIMAÇÃO SCROLL ───────────────────── */
+/* Lei 3: todo [data-animate] começa invisível
+   O GSAP anima para opacity:1 e y:0 ao entrar na tela */
+[data-animate] {
+  opacity: 0;
+  transform: translateY(32px);
+}
+
+/* Sem animação para quem prefere */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+  [data-animate] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ── COMPONENTES DE TEXTO REUTILIZÁVEIS ───────────────── */
+
+/* Eyebrow — textinho pequeno acima do título */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: var(--text-eyebrow);
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mint);
+  margin-bottom: 20px;
+}
+
+/* Linha decorativa à esquerda (seções com título alinhado à esquerda) */
+.eyebrow.left::before {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: var(--mint);
+  flex-shrink: 0;
+}
+
+/* Linhas decorativas dos dois lados (seções centralizadas) */
+.eyebrow.centered::before,
+.eyebrow.centered::after {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: var(--mint);
+  flex-shrink: 0;
+}
+
+/* Eyebrow dentro de cartões claros */
+.eyebrow.dark {
+  color: var(--accent);
+}
+
+.eyebrow.dark::before { background: var(--accent); }
+.eyebrow.dark.centered::after { background: var(--accent); }
