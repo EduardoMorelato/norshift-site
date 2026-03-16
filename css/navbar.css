@@ -6,7 +6,7 @@
 
 nav {
   position: fixed;
-  top: 20px;
+  top: 48px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 100;
@@ -97,7 +97,7 @@ nav.scrolled {
 .nav-cta {
   display: inline-block;
   background: var(--cta-gradient);
-  color: #fff;
+  color: #002f8d;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 0.85rem;

@@ -1,7 +1,6 @@
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    hero.css
-   Seção hero — fundo escuro aberto (não é cartão).
-   Spotlight cursor via Canvas (ver hero.js).
+   Seção hero — fundo escuro com texto infinito rolando (GSAP).
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 
 #hero {
@@ -10,39 +9,47 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;     /* centralizado — inspiração Mount Media */
+  align-items: center;     
   text-align: center;
   padding: 140px 48px 100px;
-  overflow: hidden;
+  overflow: hidden; /* Importante para o texto não vazar da tela */
 }
 
-/* Canvas de background (spotlight cursor) */
-#hero-canvas {
+/* ── FUNDO ANIMADO (TEXTO ROLANDO) ─────────────────────── */
+#hero-bg-text {
   position: absolute;
-  inset: 0;
+  top: 50%;
+  transform: translateY(-50%);
   width: 100%;
-  height: 100%;
-  display: block;
-  pointer-events: none;
+  z-index: 0;
+  pointer-events: none; /* Ignora o mouse */
+  opacity: 0.04; /* Transparência para ficar elegante no fundo */
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Espaço entre as duas linhas de texto */
 }
 
-/* Fade suave para o conteúdo abaixo */
-.hero-fade {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 200px;
-  background: linear-gradient(to bottom, transparent, var(--navy));
-  pointer-events: none;
-  z-index: 1;
+.marquee-track {
+  display: flex;
+  width: max-content;
+  white-space: nowrap;
+  will-change: transform; /* Otimiza a performance da animação */
 }
 
-/* Conteúdo fica acima do canvas */
+.marquee-content {
+  font-family: var(--font-display); 
+  font-size: clamp(4rem, 8vw, 9rem); /* Responsivo */
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--white); 
+}
+
+/* ── CONTEÚDO PRINCIPAL (FICA ACIMA DO TEXTO) ──────────── */
 .hero-content {
   position: relative;
   z-index: 10;
-  max-width: 860px;
+  max-width: 1080px;
   width: 100%;
 }
 
@@ -52,8 +59,6 @@
 }
 
 /* ── TÍTULO ────────────────────────────────────────────── */
-/* Lei 4: tamanho enorme
-   Lei 5: <em> em itálico mint para destaque */
 .hero-title {
   font-family: var(--font-display);
   font-weight: 900;
@@ -64,15 +69,14 @@
   margin-bottom: 28px;
 }
 
-/* Cada linha envolvida para animação de slide-up */
 .hero-title .line {
   display: block;
-  overflow: hidden;         /* mascara o movimento */
+  overflow: hidden;         
 }
 
 .hero-title .line-inner {
   display: block;
-  transform: translateY(110%); /* começa escondido abaixo */
+  transform: translateY(110%); 
 }
 
 .hero-title em {
@@ -86,8 +90,8 @@
   color: var(--muted);
   font-weight: 300;
   line-height: 1.75;
-  max-width: 480px;
-  margin: 0 auto 48px; /* auto para centralizar */
+  max-width: 580px; /* Aumentei um pouco para caber a nova copy melhor */
+  margin: 0 auto 48px; 
   opacity: 0; /* GSAP anima */
 }
 
@@ -121,7 +125,6 @@
   opacity: 0; /* GSAP anima */
 }
 
-/* Linha vertical animada */
 .scroll-line-v {
   width: 1px;
   height: 40px;

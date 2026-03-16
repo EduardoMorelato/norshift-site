@@ -7,18 +7,16 @@
    - Scroll fade-up em [data-animate]
    - Contadores animados
    - Parallax na hero e nos cartões
+   - Texto infinito rolando no fundo (Marquee)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 
 gsap.registerPlugin(ScrollTrigger)
 
 // ── 1. BODY REVEAL ──────────────────────────────────────
-// body começa opacity:0 (definido no base.css)
 gsap.to('body', { opacity: 1, duration: 0.5, ease: 'power2.out' })
-// Fallback: garante visibilidade mesmo sem GSAP
 setTimeout(() => { document.body.style.opacity = '1' }, 1500)
 
 // ── 2. HERO ENTRANCE ────────────────────────────────────
-// Sequência: eyebrow → título linha por linha → sub → botões → scroll indicator
 gsap.set(['#hero-eyebrow', '#hero-sub', '#hero-actions'], { y: 24 })
 
 gsap.timeline({ delay: 0.25 })
@@ -27,11 +25,9 @@ gsap.timeline({ delay: 0.25 })
     duration: 0.6, ease: 'power3.out',
   })
   .to('.line-inner', {
-    // line-inner começa em translateY(110%) via CSS
-    // GSAP anima para y: 0 (visível)
     y: '0%',
     duration: 1.1,
-    stagger: 0.14,   // cada linha com 140ms de delay
+    stagger: 0.14,
     ease: 'power4.out',
   }, '-=0.3')
   .to('#hero-sub', {
@@ -48,14 +44,10 @@ gsap.timeline({ delay: 0.25 })
   }, '-=0.3')
 
 // ── 3. EFEITO GELATINA NOS BOTÕES ───────────────────────
-// elastic.out(amplitude, período):
-//   amplitude 1.2 = ultrapassa levemente antes de voltar
-//   período 0.4 = velocidade da mola (menor = mais rápido)
 function jellyButton(id) {
   const el = document.getElementById(id)
   if (!el) return
 
-  // Ao entrar: estica largura, comprime altura → mola
   el.addEventListener('mouseenter', () => {
     gsap.killTweensOf(el)
     gsap.to(el, {
@@ -70,7 +62,6 @@ function jellyButton(id) {
     })
   })
 
-  // Ao sair: comprime largura, estica altura → mola reversa
   el.addEventListener('mouseleave', () => {
     gsap.killTweensOf(el)
     gsap.to(el, {
@@ -86,38 +77,32 @@ function jellyButton(id) {
   })
 }
 
-// Aplica gelatina em todos os botões relevantes
 jellyButton('btn-primary')
 jellyButton('btn-ghost')
 jellyButton('nav-cta')
 
-// ── 4. SCROLL FADE-UP — Lei 3 ───────────────────────────
-// Todos os [data-animate] entram com opacity:0 + y:32 (definido no base.css)
-// GSAP anima para opacity:1 + y:0 quando entram na viewport
+// ── 4. SCROLL FADE-UP ───────────────────────────
 gsap.utils.toArray('[data-animate]').forEach((el, i) => {
   gsap.to(el, {
     opacity: 1,
     y: 0,
     duration: 0.8,
     ease: 'power3.out',
-    delay: (i % 3) * 0.1, // stagger leve por grupo de 3 elementos
+    delay: (i % 3) * 0.1, 
     scrollTrigger: {
       trigger: el,
-      start: 'top 88%',          // dispara quando o elemento entra 88% da viewport
-      toggleActions: 'play none none none', // só anima uma vez
+      start: 'top 88%',
+      toggleActions: 'play none none none', 
     }
   })
 })
 
 // ── 5. CONTADORES ANIMADOS ───────────────────────────────
-// Uso: <span class="counter" data-target="50">0</span>
-// Conta de 0 até data-target ao entrar na tela
 document.querySelectorAll('.counter').forEach(el => {
   const target  = parseFloat(el.dataset.target)
   const isFloat = !Number.isInteger(target)
   const obj     = { val: 0 }
 
-  // Mostra o valor final imediatamente como fallback
   el.textContent = isFloat ? target.toFixed(1) : String(target)
 
   ScrollTrigger.create({
@@ -145,7 +130,6 @@ document.querySelectorAll('.counter').forEach(el => {
 })
 
 // ── 6. PARALLAX NA HERO ──────────────────────────────────
-// Conteúdo sobe mais devagar que o scroll (parallax clássico)
 gsap.to('.hero-content', {
   y: -100,
   ease: 'none',
@@ -153,25 +137,12 @@ gsap.to('.hero-content', {
     trigger: '#hero',
     start: 'top top',
     end: 'bottom top',
-    scrub: true, // sincronizado com o scroll
-  },
-})
-
-// Canvas da hero some ao scrollar
-gsap.to('#hero-canvas', {
-  opacity: 0,
-  ease: 'none',
-  scrollTrigger: {
-    trigger: '#hero',
-    start: 'center top',
-    end: 'bottom top',
     scrub: true,
   },
 })
+// O código antigo do #hero-canvas foi removido daqui
 
 // ── 7. PARALLAX NOS CARTÕES ──────────────────────────────
-// Cada cartão "sobe" suavemente ao entrar na viewport
-// Lei 3: scroll animations em tudo
 gsap.utils.toArray('.card').forEach(card => {
   gsap.fromTo(card,
     { y: 50 },
@@ -187,3 +158,45 @@ gsap.utils.toArray('.card').forEach(card => {
     }
   )
 })
+
+// ── 8. TEXTO INFINITO ROLANDO (HERO BACKGROUND) ──────────
+const track1 = document.querySelector("#track-1 .marquee-content");
+const track2 = document.querySelector("#track-2 .marquee-content");
+
+function setupMarquee(element, direction) {
+  if (!element) return; 
+  
+  const distance = direction === "left" ? "-50%" : "50%";
+  
+  const tween = gsap.to(element, {
+    x: distance,
+    ease: "none",
+    duration: 35, // Velocidade base
+    repeat: -1,
+  });
+
+  ScrollTrigger.create({
+    trigger: "#hero",
+    start: "top top",
+    end: "bottom top",
+    onUpdate: (self) => {
+      let velocity = self.getVelocity() / 400; // Sensibilidade do scroll
+      
+      gsap.to(tween, {
+        timeScale: 1 + Math.abs(velocity), 
+        duration: 0.5,
+        overwrite: true
+      });
+
+      gsap.to(tween, {
+        timeScale: 1,
+        duration: 1,
+        delay: 0.2,
+        overwrite: "auto"
+      });
+    }
+  });
+}
+
+setupMarquee(track1, "left");
+setupMarquee(track2, "right");
