@@ -26,9 +26,10 @@ gsap.timeline({ delay: 0.25 })
   })
   .to('.line-inner', {
     y: '0%',
-    duration: 1.1,
+    duration: 1.4, /* Aumentámos um pouco o tempo para não ser tão apressado */
     stagger: 0.14,
-    ease: 'power4.out',
+    ease: 'expo.out' /* O 'expo.out' tem uma travagem muito mais suave e prolongada no final do que o 'power4' */
+    /* Apagamos totalmente a linha do onComplete daqui! */
   }, '-=0.3')
   .to('#hero-sub', {
     opacity: 1, y: 0,
@@ -129,17 +130,7 @@ document.querySelectorAll('.counter').forEach(el => {
   })
 })
 
-// ── 6. PARALLAX NA HERO ──────────────────────────────────
-gsap.to('.hero-content', {
-  y: -100,
-  ease: 'none',
-  scrollTrigger: {
-    trigger: '#hero',
-    start: 'top top',
-    end: 'bottom top',
-    scrub: true,
-  },
-})
+
 // O código antigo do #hero-canvas foi removido daqui
 
 // ── 7. PARALLAX NOS CARTÕES ──────────────────────────────

@@ -17,11 +17,11 @@
 
 /* ── FUNDO ANIMADO (TEXTO ROLANDO) ─────────────────────── */
 #hero-bg-text {
-  position: absolute;
-  top: 0;
+position: absolute;
+  top: -10vh;         /* Puxa o bloco um pouco para cima para esconder a borda */
   left: 0;
   width: 100%;
-  height: 100vh; 
+  height: 120vh;      /* Aumenta a altura para 120% (cria uma sobra em cima e embaixo) */
   z-index: 0;
   pointer-events: none; 
   opacity: 0.04; 
@@ -29,6 +29,7 @@
   flex-direction: column;
   justify-content: center; /* Centraliza o bloco de texto no meio da tela */
   overflow: hidden;
+  transform: translateY(30px)
 }
 
 .marquee-track {
@@ -51,7 +52,7 @@
   font-size: var(--text-hero); /* ISSO AQUI: deixa a fonte IDÊNTICA ao título em qualquer tela */ 
   font-weight: 900;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
+  letter-spacing: -0.01em;
   color: var(--white); 
   line-height: 0.85; /* ADICIONE ESTA LINHA: Esmaga a caixa invisível do texto */
 }
@@ -60,7 +61,7 @@
 .hero-content {
   position: relative;
   z-index: 10;
-  max-width: 1080px;
+  max-width: 1280px;
   width: 100%;
 }
 
@@ -74,7 +75,7 @@
   font-family: var(--font-display);
   font-weight: 900;
   font-size: var(--text-hero);
-  line-height: 0.93;
+  line-height: 0.80;
   letter-spacing: -0.01em;
   color: var(--white);
   margin-bottom: 28px;
@@ -83,6 +84,24 @@
 .hero-title .line {
   display: block;
   overflow: hidden;         
+  position: relative;
+  
+  /* O SEGREDO: Aumenta a área visível para baixo para não cortar a sobreposição... */
+  padding-bottom: 24px; 
+  /* ...e puxa a linha seguinte de volta para cima, mantendo tudo colado! */
+  margin-bottom: -24px;  /* ADICIONE ISTO: Sem isso, o z-index é ignorado */
+}
+
+/* ADICIONE ESTAS DUAS REGRAS LOGO ABAIXO */
+
+/* Mira na 1ª linha de texto ("YOUR BUSINESS,") e joga pra frente */
+.hero-title .line:nth-child(1) {
+  z-index: 2; 
+}
+
+/* Mira na 2ª linha de texto ("FOUND FIRST.") e deixa atrás da primeira */
+.hero-title .line:nth-child(2) {
+  z-index: 1; 
 }
 
 .hero-title .line-inner {
