@@ -162,43 +162,49 @@ gsap.utils.toArray('.card').forEach(card => {
 // ── 8. TEXTO INFINITO ROLANDO (HERO BACKGROUND) ──────────
 // ── 8. TEXTO INFINITO ROLANDO (HERO BACKGROUND) ──────────
 
-// Seleciona as pistas com base nas novas classes .left e .right
 const leftTracks = document.querySelectorAll(".marquee-track.left .marquee-content");
 const rightTracks = document.querySelectorAll(".marquee-track.right .marquee-content");
 
 function setupMarquee(elements, direction) {
+  // Previne erros caso os elementos não sejam encontrados
+  if (!elements || elements.length === 0) return;
+
   elements.forEach(element => {
     // 1. Clona o conteúdo dentro dele mesmo para garantir um loop 100% perfeito
     element.innerHTML = element.innerHTML + element.innerHTML;
     
-    // 2. Define pra onde ele vai
-    const distance = direction === "left" ? "-50%" : "50%";
+    let tween;
     
-    // 3. Cria a animação contínua (35 segundos para dar a volta)
-    const tween = gsap.to(element, {
-      x: distance,
-      ease: "none",
-      duration: 35, 
-      repeat: -1,
-    });
+    // 2. Define a animação correta dependendo da direção
+    if (direction === "left") {
+      tween = gsap.to(element, {
+        x: "-50%",
+        ease: "none",
+        duration: 120, 
+        repeat: -1,
+      });
+    } else {
+      // Para ir para a direita sem falhar, começa no -50% e vai para 0%
+      tween = gsap.fromTo(element, 
+        { x: "-50%" }, 
+        { x: "0%", ease: "none", duration: 120, repeat: -1 }
+      );
+    }
 
-    // 4. O segredo da Tinuiti: Reação ao Scroll
+    // 3. Efeito Parallax/Aceleração no Scroll
     ScrollTrigger.create({
       trigger: "#hero",
       start: "top top",
       end: "bottom top",
       onUpdate: (self) => {
-        // self.getVelocity() é positivo rolando pra baixo e NEGATIVO rolando pra cima
-        let velocity = self.getVelocity() / 300; 
+        let velocity = self.getVelocity() / 50; 
         
-        // Se velocity for negativo, o timeScale fica negativo e o texto DÁ RÉ!
         gsap.to(tween, {
           timeScale: 1 + velocity, 
           duration: 0.5,
           overwrite: true
         });
 
-        // Quando o scroll para, ele volta suavemente para a velocidade normal (1)
         gsap.to(tween, {
           timeScale: 1,
           duration: 1,
@@ -210,6 +216,6 @@ function setupMarquee(elements, direction) {
   });
 }
 
-// Inicia as animações para todas as linhas
+// 4. Inicia as animações para todas as linhas
 setupMarquee(leftTracks, "left");
 setupMarquee(rightTracks, "right");

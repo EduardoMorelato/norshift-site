@@ -21,13 +21,13 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh; /* Ocupa a tela toda */
+  height: 100vh; 
   z-index: 0;
   pointer-events: none; 
   opacity: 0.04; 
   display: flex;
   flex-direction: column;
-  justify-content: space-around; /* Espalha as linhas igualmente pela tela */
+  justify-content: center; /* Centraliza o bloco de texto no meio da tela */
   overflow: hidden;
 }
 
@@ -42,16 +42,18 @@
   display: flex;
   width: max-content;
   white-space: nowrap;
-  will-change: transform; /* Otimiza a performance da animação */
+  will-change: transform; 
+  margin-top: -10px; /* É AQUI QUE VOCÊ GRUDA AS LINHAS! Use valores negativos como -20px, -30px para aproximar mais */
 }
 
 .marquee-content {
   font-family: var(--font-display); 
-  font-size: clamp(4rem, 8vw, 9rem); /* Responsivo */
+  font-size: var(--text-hero); /* ISSO AQUI: deixa a fonte IDÊNTICA ao título em qualquer tela */ 
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 0.02em;
   color: var(--white); 
+  line-height: 0.85; /* ADICIONE ESTA LINHA: Esmaga a caixa invisível do texto */
 }
 
 /* ── CONTEÚDO PRINCIPAL (FICA ACIMA DO TEXTO) ──────────── */

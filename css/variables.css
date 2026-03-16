@@ -56,7 +56,7 @@
    /* textos, parágrafos */
 
    /* Escala de tamanhos */
-   --text-hero: clamp(3.8rem, 11vw, 10rem);
+   --text-hero: clamp(3.8rem, 11vw, 12rem);
    --text-h2: clamp(2.4rem, 5vw, 4rem);
    --text-h3: clamp(1.4rem, 2.5vw, 2rem);
    --text-body: 1rem;
