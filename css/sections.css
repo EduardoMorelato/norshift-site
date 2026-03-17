@@ -11,16 +11,16 @@
 .ticker-wrap {
   width: 100%;
   overflow: hidden;
-  padding: 20px 0;
-  border-top:    1px solid var(--border-dark);
-  border-bottom: 1px solid var(--border-dark);
-  background: rgba(13,28,53,0.6);
+  padding: 40px 0;
+  border-top:    2px solid var(--mint);
+  border-bottom: 2px solid var(--mint);
+  background: var(--navy);
 }
 
 .ticker-track {
   display: flex;
   white-space: nowrap;
-  animation: ticker 30s linear infinite;
+  animation: ticker 20s linear infinite;
 }
 
 /* Pausa ao passar o mouse */
@@ -35,10 +35,10 @@
   padding: 0 32px;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 0.85rem;
-  letter-spacing: 0.18em;
+  font-size: 1.2rem;
+  letter-spacing: 0.8em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--white);
   user-select: none;
 }
 

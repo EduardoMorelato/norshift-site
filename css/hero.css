@@ -37,7 +37,7 @@ position: absolute;
   height: 120vh;       /* Aumenta a altura para 120% (cria uma sobra em cima e embaixo) */
   z-index: 0;
   pointer-events: none; 
-  opacity: 0.04; 
+  opacity: 0.1; 
   display: flex;
   flex-direction: column;
   justify-content: center; /* Centraliza o bloco de texto no meio da tela */
@@ -115,9 +115,40 @@ position: absolute;
   display: block;
 }
 
-.hero-title em {
-  font-style: italic;
-  color: var(--mint);
+/* ── O SÓLIDO ESCONDIDO ATRÁS DO TÍTULO ── */
+/* ── O ESCUDO DE FADE (OPACIDADE) ATRÁS DO TÍTULO ── */
+#hero-title-main {
+  display: inline-block; 
+  position: relative;
+  z-index: 5;
+  /* (Se tinha um margin-bottom aqui para afastar o subtítulo, pode mantê-lo) */
+}
+
+/* Cria uma "tela" invisível atrás do texto para desenhar o fade */
+/* Cria uma "tela" invisível atrás do texto para desenhar o fade */
+#hero-title-main::before {
+  content: '';
+  position: absolute;
+  
+  /* Usa 'em' em vez de 'px'. 
+     O escudo cresce e encolhe exatemente na mesma proporção da fonte! */
+  top: 0.05em;    /* Puxa para cima proporcionalmente */
+  bottom: -0.05em; /* Empurra para baixo proporcionalmente */
+  
+  /* As laterais também usam 'em' para o fade ser mais curto no mobile e mais largo no desktop */
+  left: -1.1em;
+  right: -1.1em;
+  
+  z-index: -1; 
+
+  /* A mágica da opacidade */
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--navy) 20%, 
+    var(--navy) 80%,
+    transparent 100%
+  );
 }
 
 /* ── SUBTÍTULO ─────────────────────────────────────────── */
@@ -192,8 +223,8 @@ position: absolute;
 #hero-title-main .line-inner span {
   display: inline-block;
   opacity: 0;
-  filter: blur(10px);
-  transform: scale(1.4);
+  filter: blur(4px);
+  transform: scale(2);
   /* A linha 'color: var(--white);' foi apagada daqui! */
 }
 @keyframes slideDown {

@@ -6,17 +6,16 @@
 
 nav {
   position: fixed;
-  top: 28px;
+  top: 1.3em;
   left: 50%;
   transform: translateX(-50%);
   z-index: 100;
   width: calc(100% - 80px);
-  max-width: 690px;
-
+  max-width: 39em;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 4px 4px;
+  padding: 0.7em 0.7em;
 
   /* Pill flutuante com formato arredondado */
   border-radius: 999px;

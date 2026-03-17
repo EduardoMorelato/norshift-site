@@ -80,7 +80,7 @@ tl.to('#hero-title-main .line-inner span', {
 }, '-=0.4')
 // 7. E o fundo com o letreiro infinito acorda suavemente
 .to('#hero-bg-text', {
-  opacity: 0.04,
+  opacity: 0.1,
   duration: 1.0
 }, '-=1.0');
 
