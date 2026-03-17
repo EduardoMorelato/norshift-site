@@ -157,7 +157,7 @@ position: absolute;
   color: var(--muted);
   font-weight: 300;
   line-height: 1.75;
-  max-width: 580px; /* Aumentei um pouco para caber a nova copy melhor */
+  max-width: 50vw; /* Aumentei um pouco para caber a nova copy melhor */
   margin: 0 auto 48px; 
   opacity: 0; /* GSAP anima */
 }
@@ -176,7 +176,7 @@ position: absolute;
 .scroll-indicator {
   position: absolute;
   bottom: 36px;
-  left: 51%;
+  left: 52%;
   transform: translateX(-50%);
   z-index: 10;
   display: flex;

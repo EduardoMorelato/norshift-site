@@ -17,8 +17,7 @@
   
   /* Garante que esta seção inteira passe por cima do Ticker */
   position: relative;
-  z-index: 10;             
-  background: var(--navy);
+  z-index: 10;
   
   /* A margem negativa (-2px) foi removida, o GSAP fará o movimento suave! */
 }
