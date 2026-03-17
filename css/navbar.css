@@ -11,18 +11,18 @@ nav {
   transform: translateX(-50%);
   z-index: 100;
   width: calc(100% - 80px);
-  max-width: 1100px;
+  max-width: 690px;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 14px;
+  padding: 4px 4px;
 
   /* Pill flutuante com formato arredondado */
   border-radius: 999px;
   
   /* ── EFEITO GLASSMORPHISM PREMIUM ── */
-  background: rgba(10, 22, 40, 0.1); /* Mais transparente para revelar o fundo */
+  background: rgb(10, 22, 40, 0.85); /* Mais transparente para revelar o fundo */
   backdrop-filter: blur(32px);        /* Desfoque mais intenso e luxuoso */
   -webkit-backdrop-filter: blur(32px);
   
@@ -36,7 +36,7 @@ nav {
     background var(--transition-medium),
     box-shadow var(--transition-medium),
     backdrop-filter var(--transition-medium),
-    top 0.3s ease;
+    top 0.4s ease;
 }
 
 /* Estado ao scrollar — Mantém o vidro, mas ligeiramente mais fosco para facilitar a leitura */
@@ -54,12 +54,13 @@ nav.scrolled {
 .nav-logo {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: 1.50rem;
+  font-size: 1rem;
   letter-spacing: 0.02em;
   color: var(--white);
   text-decoration: none;
   flex-shrink: 0;
   line-height: 1;
+  padding: 4px 16px;
 }
 
 .nav-logo span {
@@ -69,7 +70,7 @@ nav.scrolled {
 /* ── LINKS ─────────────────────────────────────────────── */
 .nav-links {
   display: flex;
-  gap: 1.9rem;
+  gap: 1rem;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -79,7 +80,7 @@ nav.scrolled {
   color: var(--muted);
   text-decoration: none;
   font-family: var(--font-body);
-  font-size: 1.20rem;
+  font-size: 1rem;
   font-weight: 400;
   transition: color var(--transition-fast);
   position: relative;
@@ -107,10 +108,10 @@ nav.scrolled {
   color: #002f8d;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  padding: 12px 40px;
+  padding: 8px 18px;
   border-radius: 999px;
   text-decoration: none;
   flex-shrink: 0;

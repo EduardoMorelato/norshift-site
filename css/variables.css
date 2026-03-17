@@ -37,13 +37,13 @@
    --border-dark: rgba(255, 255, 255, 0.07);
 
    /* Gradiente CTA — botões e destaques */
-   --cta-from: #ddef30;
-   --cta-to: #2fe1db;
+   --cta-from: #4DFFB4;
+   --cta-to: #4DFFB4;
    --cta-gradient: linear-gradient(135deg, var(--cta-from), var(--cta-to));
-   --cta-shadow: 0 4px 24px rgba(108, 99, 255, 0.35);
+   --cta-shadow: 0 4px 24px rgba(108, 99, 255, 0.1);
 
    /* Roxo puro para accent em cartões claros */
-   --accent: #2fe1db;
+   --accent: #4DFFB4;
 
    /* ── TIPOGRAFIA ─────────────────────────────────────────
      Lei 4: hierarquia extrema entre tamanhos
