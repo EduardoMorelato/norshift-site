@@ -21,7 +21,7 @@ nav {
   /* Pill flutuante */
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,0.08);
-  background: rgba(10,22,40,0.55);
+  background: rgb(198, 221, 255);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   box-shadow:

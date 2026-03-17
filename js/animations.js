@@ -64,6 +64,7 @@ tl.to('#hero-title-main .line-inner span', {
   duration: 1.0, 
   ease: 'expo.inOut'
 }, '+=0.1')
+
 // O Preloader (fundo preto) desaparece
 .to('#preloader', {
   opacity: 0,
