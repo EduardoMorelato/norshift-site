@@ -12,37 +12,80 @@
 
 gsap.registerPlugin(ScrollTrigger)
 
-// ── 1. BODY REVEAL ──────────────────────────────────────
-gsap.to('body', { opacity: 1, duration: 0.5, ease: 'power2.out' })
-setTimeout(() => { document.body.style.opacity = '1' }, 1500)
+// ── 1. PRELOADER & HERO ENTRANCE (AUDI EFFECT) ──────────
+const tl = gsap.timeline();
 
-// ── 2. HERO ENTRANCE ────────────────────────────────────
-gsap.set(['#hero-eyebrow', '#hero-sub', '#hero-actions'], { y: 24 })
+// 1. Esconde o que não deve aparecer na inicialização
+gsap.set('.hero-sub, .hero-actions, #hero-bg-text, .scroll-indicator, #navbar', { opacity: 0 });
 
-gsap.timeline({ delay: 0.25 })
-  .to('#hero-eyebrow', {
-    opacity: 1, y: 0,
-    duration: 0.6, ease: 'power3.out',
-  })
-  .to('.line-inner', {
-    y: '0%',
-    duration: 1.4, /* Aumentámos um pouco o tempo para não ser tão apressado */
-    stagger: 0.14,
-    ease: 'expo.out' /* O 'expo.out' tem uma travagem muito mais suave e prolongada no final do que o 'power4' */
-    /* Apagamos totalmente a linha do onComplete daqui! */
-  }, '-=0.3')
-  .to('#hero-sub', {
-    opacity: 1, y: 0,
-    duration: 0.7, ease: 'power3.out',
-  }, '-=0.5')
-  .to('#hero-actions', {
-    opacity: 1, y: 0,
-    duration: 0.6, ease: 'power3.out',
-  }, '-=0.45')
-  .to('#scroll-indicator', {
-    opacity: 1,
-    duration: 0.5, ease: 'power2.out',
-  }, '-=0.3')
+// 2. Configura o Título Principal
+gsap.set('#hero-title-main', { 
+  scale: 0.45, 
+  y: '12vh', 
+  opacity: 1, 
+  position: 'relative',
+  zIndex: 10000 
+});
+
+// 3. Separa as letras respeitando o <em> verde do "FIRST"
+document.querySelectorAll('#hero-title-main .line-inner').forEach(line => {
+  const em = line.querySelector('em');
+  if (em) {
+    const text = em.textContent;
+    em.innerHTML = text.split('').map(char => `<span>${char === ' ' ? '&nbsp;' : char}</span>`).join('');
+  } else {
+    const text = line.textContent;
+    line.innerHTML = text.split('').map(char => `<span>${char === ' ' ? '&nbsp;' : char}</span>`).join('');
+  }
+});
+
+// 4. Sequência de Ignição
+tl.to('#hero-title-main .line-inner span', {
+  opacity: 1,
+  filter: 'blur(0px)',
+  scale: 1,
+  duration: 0.04,
+  stagger: { each: 0.04, from: "random" },
+  ease: 'power2.out'
+})
+// O Flash de Ignição (DIFERENCIADO: Branco vs Neon)
+.to('#hero-title-main .line-inner span', {
+  // Lógica: Se a letra estiver dentro do <em>, fica Verde Mint. Senão, fica Branca.
+  color: (index, element) => element.closest('em') ? '#4DFFB4' : '#F0F4FF',
+  textShadow: (index, element) => element.closest('em') ? '0 0 15px #4DFFB4' : '0 0 15px rgba(255, 255, 255, 0.8)',
+  duration: 0.5, // Brilho mais lento e cadenciado como pediu antes
+  yoyo: true,
+  repeat: 1
+})
+// 5. O Mergulho (Expansão do título)
+.to('#hero-title-main', {
+  scale: 1,
+  y: 0,
+  duration: 1.0, 
+  ease: 'expo.inOut'
+}, '+=0.1')
+// O Preloader (fundo preto) desaparece
+.to('#preloader', {
+  opacity: 0,
+  duration: 0.8,
+  ease: 'power2.out',
+  onComplete: () => gsap.set('#preloader', { display: 'none' })
+}, '-=0.8')
+// 6. O resto dos elementos acordam
+.to('.hero-sub, .hero-actions, .scroll-indicator, #navbar', {
+  opacity: 1,
+  duration: 1.0,
+  stagger: 0.15
+}, '-=0.4')
+// 7. E o fundo com o letreiro infinito acorda suavemente
+.to('#hero-bg-text', {
+  opacity: 0.04,
+  duration: 1.0
+}, '-=1.0');
+
+// Garante que o body em si está visível
+gsap.set('body', { opacity: 1 });
+
 
 // ── 3. EFEITO GELATINA NOS BOTÕES ───────────────────────
 function jellyButton(id) {
