@@ -18,28 +18,35 @@ nav {
   align-items: center;
   padding: 8px 14px;
 
-  /* Pill flutuante */
+  /* Pill flutuante com formato arredondado */
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.08);
-  background: rgb(198, 221, 255);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  
+  /* ── EFEITO GLASSMORPHISM PREMIUM ── */
+  background: rgba(10, 22, 40, 0.1); /* Mais transparente para revelar o fundo */
+  backdrop-filter: blur(32px);        /* Desfoque mais intenso e luxuoso */
+  -webkit-backdrop-filter: blur(32px);
+  
+  /* Borda externa subtil e reflexo interno (a magia do vidro) */
+  border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow:
-    0 8px 32px rgba(0,0,0,0.3),
-    inset 0 1px 0 rgba(255,255,255,0.05);
+    0 12px 32px rgba(0, 0, 0, 0.4),            /* Sombra projetada escura */
+    inset 0 1px 1px rgba(255, 255, 255, 0.1); /* Reflexo luminoso no topo da pílula */
 
   transition:
     background var(--transition-medium),
     box-shadow var(--transition-medium),
+    backdrop-filter var(--transition-medium),
     top 0.3s ease;
 }
 
-/* Estado ao scrollar — mais sólido */
+/* Estado ao scrollar — Mantém o vidro, mas ligeiramente mais fosco para facilitar a leitura */
 nav.scrolled {
-  background: rgba(10,22,40,0.96);
+  background: rgba(10, 22, 40, 0.85);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
   box-shadow:
-    0 12px 48px rgba(0,0,0,0.5),
-    inset 0 1px 0 rgba(255,255,255,0.05);
+    0 16px 48px rgba(0, 0, 0, 0.6),
+    inset 0 1px 1px rgba(255, 255, 255, 0.12);
   top: 12px;
 }
 

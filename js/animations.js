@@ -251,6 +251,7 @@ function setupMarquee(elements, direction) {
   });
 }
 
+
 // 4. Inicia as animações para todas as linhas
 setupMarquee(leftTracks, "left");
 setupMarquee(rightTracks, "right");

@@ -5,14 +5,29 @@
 
 #hero {
   position: relative;
-  min-height: 100vh;
+  
+  /* Altura total menos apenas a margem do topo (10px) */
+  min-height: calc(100vh - 10px);
+  
+  /* Margem: 10px no topo e lados, 0 em baixo para colar na faixa contínua */
+  margin: 10px 10px 0 10px;
+  
+  /* Arredondado apenas em cima: Top-Left, Top-Right, Bottom-Right, Bottom-Left */
+  border-radius: 40px 40px 0 0; 
+  
+  /* Borda branca, mas sem borda na base para fundir perfeitamente com o ticker */
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: none;
+  
+  background: var(--navy);
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;     
   text-align: center;
   padding: 140px 48px 100px;
-  overflow: hidden; /* Importante para o texto não vazar da tela */
+  overflow: hidden; 
 }
 
 /* ── FUNDO ANIMADO (TEXTO ROLANDO) ─────────────────────── */
@@ -29,7 +44,7 @@ position: absolute;
   flex-direction: column;
   justify-content: center; /* Centraliza o bloco de texto no meio da tela */
   overflow: hidden;
-  transform: translateY(30px)
+  transform: translateY(7px)
 }
 
 .marquee-track {
@@ -75,10 +90,10 @@ position: absolute;
   font-family: var(--font-display);
   font-weight: 900;
   font-size: var(--text-hero);
-  line-height: 0.76;
+  line-height: 0.73;
   letter-spacing: -0.01em;
   color: var(--white);
-  margin-bottom: 0px;
+  margin-bottom: 40px;
 }
 
 .hero-title .line {
@@ -170,7 +185,10 @@ position: absolute;
   position: absolute; 
   inset: 0;
   background: var(--navy); 
-  z-index: 5; /* Fica exatamente entre o letreiro de fundo e o seu título! */
+  z-index: 5;
+  
+  /* ADICIONE ISTO: Força a tela de carregamento a respeitar o formato do cartão */
+  border-radius: inherit; 
 }
 
 /* Prepara as letras (LEDs) - SEM ROUBAR A COR ORIGINAL */
