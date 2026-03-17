@@ -12,8 +12,15 @@
   display: flex;
   flex-direction: column;
   gap: var(--card-gap);
-  padding: 0 24px;          /* margem lateral da esteira */
+  padding: 0 24px;          
   padding-bottom: 24px;
+  
+  /* Garante que esta seção inteira passe por cima do Ticker */
+  position: relative;
+  z-index: 10;             
+  background: var(--navy);
+  
+  /* A margem negativa (-2px) foi removida, o GSAP fará o movimento suave! */
 }
 
 /* ── CARTÃO BASE ────────────────────────────────────────

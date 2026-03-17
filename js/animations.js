@@ -12,7 +12,13 @@
 
 gsap.registerPlugin(ScrollTrigger)
 
+gsap.registerPlugin(ScrollTrigger)
+
 // ── 1. PRELOADER & HERO ENTRANCE (AUDI EFFECT) ──────────
+
+// TRANCA O SCROLL DO SITE IMEDIATAMENTE
+document.body.style.overflow = 'hidden';
+
 const tl = gsap.timeline();
 
 // 1. Esconde o que não deve aparecer na inicialização
@@ -48,12 +54,11 @@ tl.to('#hero-title-main .line-inner span', {
   stagger: { each: 0.04, from: "random" },
   ease: 'power2.out'
 })
-// O Flash de Ignição (DIFERENCIADO: Branco vs Neon)
+// O Flash de Ignição
 .to('#hero-title-main .line-inner span', {
-  // Lógica: Se a letra estiver dentro do <em>, fica Verde Mint. Senão, fica Branca.
   color: (index, element) => element.closest('em') ? '#4DFFB4' : '#F0F4FF',
   textShadow: (index, element) => element.closest('em') ? '0 0 15px #4DFFB4' : '0 0 15px rgba(255, 255, 255, 0.8)',
-  duration: 0.5, // Brilho mais lento e cadenciado como pediu antes
+  duration: 0.5, 
   yoyo: true,
   repeat: 1
 })
@@ -70,7 +75,11 @@ tl.to('#hero-title-main .line-inner span', {
   opacity: 0,
   duration: 0.8,
   ease: 'power2.out',
-  onComplete: () => gsap.set('#preloader', { display: 'none' })
+  onComplete: () => {
+    gsap.set('#preloader', { display: 'none' });
+    // DESTRANCA O SCROLL ASSIM QUE A TELA PRETA SOME!
+    document.body.style.overflow = ''; 
+  }
 }, '-=0.8')
 // 6. O resto dos elementos acordam
 .to('.hero-sub, .hero-actions, .scroll-indicator, #navbar', {
@@ -250,6 +259,18 @@ function setupMarquee(elements, direction) {
     });
   });
 }
+
+// ── 9. PARALLAX: CARTÕES ENGOLINDO O TICKER ─────────────────
+gsap.to('.card-track', {
+  y: -120, // Quantidade de pixels que a seção vai invadir por cima do Ticker
+  ease: 'none',
+  scrollTrigger: {
+    trigger: '.ticker-wrap',
+    start: 'top 50%',  // O efeito começa quando o Ticker chega a meio da tela
+    end: 'bottom top', // O efeito termina quando o Ticker sai pelo topo
+    scrub: true        // O movimento é preso ao scroll do rato
+  }
+});
 
 
 // 4. Inicia as animações para todas as linhas
