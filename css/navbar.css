@@ -104,7 +104,7 @@ nav.scrolled {
 .nav-cta {
   display: inline-block;
   background: var(--cta-gradient);
-  color: #002f8d;
+  color: #c6c6c6;
   font-family: var(--font-body);
   font-weight: 700;
   font-size: 0.8rem;

@@ -12,6 +12,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--card-gap);
+  
+  /* 0 no topo (sem espaço), 24px nas laterais (para não colar na tela) */
   padding: 0 24px;          
   padding-bottom: 24px;
   
@@ -19,7 +21,8 @@
   position: relative;
   z-index: 10;
   
-  /* A margem negativa (-2px) foi removida, o GSAP fará o movimento suave! */
+  /* ADICIONE ISTO: É esta linha que puxa o cartão à força para cima! */
+  margin-top: -40px; 
 }
 
 /* ── CARTÃO BASE ────────────────────────────────────────

@@ -22,7 +22,7 @@
   border: none;
   cursor: pointer;
   min-height: 52px;
-  padding: 14px 32px;
+  padding: 12px 28px;
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
   /* transform animado pelo GSAP (efeito gelatina) */
 }
@@ -45,7 +45,7 @@
   background: transparent;
   color: var(--muted);
   font-size: 0.9rem;
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid rgba(255, 255, 255, 0.584);
   font-family: var(--font-body);
   font-weight: 500;
   letter-spacing: 0;

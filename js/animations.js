@@ -10,9 +10,31 @@
    - Texto infinito rolando no fundo (Marquee)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger);
 
-gsap.registerPlugin(ScrollTrigger)
+// ── 0. INICIALIZAR SOFT SCROLL (LENIS) ──────────────────
+const lenis = new Lenis({
+  duration: 1.2,     // Duração do deslizamento (aumente para ficar mais "escorregadio")
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Curva de inércia super suave
+  smooth: true,
+});
+
+// Sincroniza o Lenis com o ScrollTrigger do GSAP
+lenis.on('scroll', ScrollTrigger.update);
+
+// Adiciona o motor do Lenis ao relógio interno do GSAP
+gsap.ticker.add((time) => {
+  lenis.raf(time * 1000);
+});
+
+// Desliga o atraso padrão do GSAP para evitar tremedeiras nas animações
+gsap.ticker.lagSmoothing(0);
+// ────────────────────────────────────────────────────────
+
+
+// ── 1. PRELOADER & HERO ENTRANCE (AUDI EFFECT) ──────────
+document.body.style.overflow = 'hidden';
+// ... o resto do seu código ..
 
 // ── 1. PRELOADER & HERO ENTRANCE (AUDI EFFECT) ──────────
 
