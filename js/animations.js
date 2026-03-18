@@ -29,17 +29,13 @@ gsap.ticker.add((time) => {
 
 // Desliga o atraso padrão do GSAP para evitar tremedeiras nas animações
 gsap.ticker.lagSmoothing(0);
-// ────────────────────────────────────────────────────────
 
-
-// ── 1. PRELOADER & HERO ENTRANCE (AUDI EFFECT) ──────────
-document.body.style.overflow = 'hidden';
-// ... o resto do seu código ..
 
 // ── 1. PRELOADER & HERO ENTRANCE (AUDI EFFECT) ──────────
 
 // TRANCA O SCROLL DO SITE IMEDIATAMENTE
 document.body.style.overflow = 'hidden';
+lenis.stop(); // ← ADICIONADO: Congela o motor do Lenis
 
 const tl = gsap.timeline();
 
@@ -67,23 +63,19 @@ document.querySelectorAll('#hero-title-main .line-inner').forEach(line => {
   }
 });
 
-// 4. Sequência de Ignição
+// 4. Nova Entrada: Onda Elegante (Slide Up + Tilt)
 tl.to('#hero-title-main .line-inner span', {
   opacity: 1,
-  filter: 'blur(0px)',
-  scale: 1,
-  duration: 0.04,
-  stagger: { each: 0.04, from: "random" },
-  ease: 'power2.out'
+  y: 0,           // Sobe para a posição original
+  rotate: 0,      // Desentorta a letra
+  duration: 0.8,  // Tempo suave
+  stagger: { 
+    each: 0.04,   // Distância entre cada letra
+    from: "start" // Vem da esquerda para a direita de forma organizada (não mais aleatório)
+  },
+  ease: 'back.out(1.5)' // Dá um leve efeito elástico no final do movimento
 })
-// O Flash de Ignição
-.to('#hero-title-main .line-inner span', {
-  color: (index, element) => element.closest('em') ? '#4DFFB4' : '#F0F4FF',
-  textShadow: (index, element) => element.closest('em') ? '0 0 15px #4DFFB4' : '0 0 15px rgba(255, 255, 255, 0.8)',
-  duration: 0.5, 
-  yoyo: true,
-  repeat: 1
-})
+
 // 5. O Mergulho (Expansão do título)
 .to('#hero-title-main', {
   scale: 1,
@@ -101,8 +93,10 @@ tl.to('#hero-title-main .line-inner span', {
     gsap.set('#preloader', { display: 'none' });
     // DESTRANCA O SCROLL ASSIM QUE A TELA PRETA SOME!
     document.body.style.overflow = ''; 
+    lenis.start(); // ← ADICIONADO: Liga o motor do Lenis novamente
   }
 }, '-=0.8')
+
 // 6. O resto dos elementos acordam
 .to('.hero-sub, .hero-actions, .scroll-indicator, #navbar', {
   opacity: 1,
@@ -206,8 +200,6 @@ document.querySelectorAll('.counter').forEach(el => {
 })
 
 
-// O código antigo do #hero-canvas foi removido daqui
-
 // ── 7. PARALLAX NOS CARTÕES ──────────────────────────────
 gsap.utils.toArray('.card').forEach(card => {
   gsap.fromTo(card,
@@ -225,7 +217,6 @@ gsap.utils.toArray('.card').forEach(card => {
   )
 })
 
-// ── 8. TEXTO INFINITO ROLANDO (HERO BACKGROUND) ──────────
 // ── 8. TEXTO INFINITO ROLANDO (HERO BACKGROUND) ──────────
 
 const leftTracks = document.querySelectorAll(".marquee-track.left .marquee-content");
@@ -274,7 +265,7 @@ function setupMarquee(elements, direction) {
         gsap.to(tween, {
           timeScale: 1,
           duration: 1,
-          delay: 0.2,
+          delay: 0.5,
           overwrite: "auto"
         });
       }
@@ -290,7 +281,7 @@ gsap.to('.card-track', {
     trigger: '.ticker-wrap',
     start: 'top 50%',  // O efeito começa quando o Ticker chega a meio da tela
     end: 'bottom top', // O efeito termina quando o Ticker sai pelo topo
-    scrub: true        // O movimento é preso ao scroll do rato
+    scrub: true        // O movimento é preso ao scroll do mouse
   }
 });
 

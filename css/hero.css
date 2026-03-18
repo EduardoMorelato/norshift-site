@@ -219,13 +219,11 @@ position: absolute;
   border-radius: inherit; 
 }
 
-/* Prepara as letras (LEDs) - SEM ROUBAR A COR ORIGINAL */
+/* Prepara as letras para a nova animação de Slide Up */
 #hero-title-main .line-inner span {
   display: inline-block;
   opacity: 0;
-  filter: blur(4px);
-  transform: scale(2);
-  /* A linha 'color: var(--white);' foi apagada daqui! */
+  transform: translateY(80px) rotate(10deg); /* Escondidas lá em baixo e inclinadas */
 }
 @keyframes slideDown {
   0%   { transform: translateY(-100%); }
