@@ -12,8 +12,8 @@
   ──────────────────────────────────────────────────────── */
 
    /* Background global (esteira entre os cartões) */
-   --navy: #001d48;
-   --navy-mid: #0d1c35;
+   --navy: #001452;
+   --navy-mid: #0038B6;
 
    /* Cartões (seções claras sobre a esteira escura) */
    --card-bg: #e3e3e3;
@@ -21,13 +21,13 @@
    --card-bg-inner: #f9f9f9;
    /* superfície interna dos cartões */
    --card-border: rgba(0, 0, 0, 0.06);
-   --card-text: #011026;
+   --card-text: #001452;
    /* texto principal dentro dos cartões */
    --card-muted: #3b5375;
    /* texto secundário dentro dos cartões */
 
    /* Accent único — mint */
-   --mint: #4DFFB4;
+   --mint: #009BD1;
 
    /* Texto na hero e elementos sobre fundo escuro */
    --white: #F0F4FF;
@@ -37,13 +37,13 @@
    --border-dark: rgba(255, 255, 255, 0.07);
 
    /* Gradiente CTA — botões e destaques */
-   --cta-from: #4DFFB4;
-   --cta-to: #4DFFB4;
+   --cta-from: #009BD1;
+   --cta-to: #009BD1;
    --cta-gradient: linear-gradient(135deg, var(--cta-from), var(--cta-to));
    --cta-shadow: 0 4px 24px rgba(108, 99, 255, 0.1);
 
    /* Roxo puro para accent em cartões claros */
-   --accent: #4DFFB4;
+   --accent: #009BD1;
 
    /* ── TIPOGRAFIA ─────────────────────────────────────────
      Lei 4: hierarquia extrema entre tamanhos
@@ -68,9 +68,9 @@
      Lei 10: espaço generoso entre tudo
   ──────────────────────────────────────────────────────── */
 
-   --card-radius: 68px;
+   --card-radius: 58px;
    /* border-radius dos cartões */
-   --card-gap: 16px;
+   --card-gap: 14px;
    /* espaço entre cartões na esteira */
 
    /* Padding interno de cada cartão */
