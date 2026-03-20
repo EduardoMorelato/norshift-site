@@ -33,6 +33,8 @@
    --white: #F0F4FF;
    /* off-white frio */
    --muted: #7A94BA;
+   /* preto forte */
+   --black: #080808;
    /* texto muted sobre navy */
    --border-dark: rgba(255, 255, 255, 0.07);
 

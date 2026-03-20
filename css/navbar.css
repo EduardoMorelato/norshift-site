@@ -21,7 +21,7 @@ nav {
   border-radius: 999px;
   
   /* ── EFEITO GLASSMORPHISM PREMIUM ── */
-  background: rgb(10, 22, 40, 0.85); /* Mais transparente para revelar o fundo */
+  background: rgba(248, 251, 255, 0.45); /* Mais transparente para revelar o fundo */
   backdrop-filter: blur(32px);        /* Desfoque mais intenso e luxuoso */
   -webkit-backdrop-filter: blur(32px);
   
@@ -40,7 +40,7 @@ nav {
 
 /* Estado ao scrollar — Mantém o vidro, mas ligeiramente mais fosco para facilitar a leitura */
 nav.scrolled {
-  background: rgba(10, 22, 40, 0.85);
+  background: rgba(226, 238, 255, 0.95);
   backdrop-filter: blur(40px);
   -webkit-backdrop-filter: blur(40px);
   box-shadow:
@@ -76,7 +76,7 @@ nav.scrolled {
 }
 
 .nav-links a {
-  color: var(--muted);
+  color: var(--black);
   text-decoration: none;
   font-family: var(--font-body);
   font-size: 1rem;
